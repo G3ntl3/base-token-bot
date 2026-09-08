@@ -1,0 +1,42 @@
+services:
+  - type: worker
+    name: base-token-bot
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    autoDeploy: true
+    disk:
+      name: bot-data
+      mountPath: /app/data
+      sizeGB: 1
+    envVars:
+      - key: CHAIN_ID
+        value: "8453"
+      - key: BASE_RPC_URL
+        value: "https://mainnet.base.org"
+      - key: BASE_WS_RPC_URL
+        value: "wss://base-rpc.publicnode.com"
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_ADMIN_IDS
+        sync: false
+      - key: TOKEN_CA
+        sync: false
+      - key: MAX_BUY_ETH
+        value: "0.0001"
+      - key: MAX_SLIPPAGE_BPS
+        value: "300"
+      - key: MIN_LIQUIDITY_ETH
+        value: "0.25"
+      - key: DRY_RUN
+        value: "false"
+      - key: BUY_ONCE
+        value: "true"
+      - key: SIGNER_MODE
+        value: "privatekey"
+      - key: WALLET_PRIVATE_KEY
+        sync: false
+      - key: ENCRYPTION_SECRET
+        sync: false
+      - key: DATABASE_URL
+        value: "/app/data/bot.sqlite"
